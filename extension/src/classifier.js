@@ -23,16 +23,38 @@ function getSession() {
   return sessionPromise;
 }
 
+function dataURItoBlob(dataUrl) {
+  const parts = dataUrl.split(",");
+  const byteString = atob(parts[1]);
+  const mimeString = parts[0].split(":")[1].split(";")[0];
+  const ia = new Uint8Array(byteString.length);
+  for (let i = 0; i < byteString.length; i++) {
+    ia[i] = byteString.charCodeAt(i);
+  }
+  return new Blob([ia], { type: mimeString });
+}
+
 export async function predictBoardSquares(dataUrl, crop) {
+  const getBitmapPromise = (async () => {
+    try {
+      const blob = dataURItoBlob(dataUrl);
+      return crop
+        ? await createImageBitmap(blob, crop.x, crop.y, crop.width, crop.height)
+        : await createImageBitmap(blob);
+    } catch {
+      const blob = await fetch(dataUrl).then((r) => r.blob());
+      return crop
+        ? await createImageBitmap(blob, crop.x, crop.y, crop.width, crop.height)
+        : await createImageBitmap(blob);
+    }
+  })();
+
   const [session, bitmap] = await Promise.all([
-    getSession(),
-    fetch(dataUrl)
-      .then((r) => r.blob())
-      .then((blob) =>
-        crop
-          ? createImageBitmap(blob, crop.x, crop.y, crop.width, crop.height)
-          : createImageBitmap(blob),
-      ),
+    getSession().catch((err) => {
+      console.error("Failed to load chess_piece_classifier.onnx. Ensure the model file exists in extension folder:", err);
+      throw err;
+    }),
+    getBitmapPromise,
   ]);
 
   const canvas = new OffscreenCanvas(BOARD_SIZE, BOARD_SIZE);

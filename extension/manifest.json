@@ -54,5 +54,14 @@
   },
   "cross_origin_embedder_policy": {
     "value": "require-corp"
-  }
+  },
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "chess_piece_classifier.onnx",
+        "vendor/*"
+      ],
+      "matches": ["<all_urls>"]
+    }
+  ]
 }
