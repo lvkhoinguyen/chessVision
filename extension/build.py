@@ -30,6 +30,8 @@ def build() -> None:
 
         if target == "firefox":
             manifest["background"] = {"scripts": ["src/background.js"]}
+            if "offscreen" in manifest.get("permissions", []):
+                manifest["permissions"] = [p for p in manifest["permissions"] if p != "offscreen"]
 
         with zipfile.ZipFile(zip_path, "w", zipfile.ZIP_DEFLATED) as zf:
             zf.writestr("manifest.json", json.dumps(manifest, indent=2))

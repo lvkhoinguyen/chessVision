@@ -12,7 +12,9 @@
     "activeTab",
     "scripting",
     "storage",
-    "declarativeNetRequestWithHostAccess"
+    "declarativeNetRequestWithHostAccess",
+    "offscreen",
+    "tabs"
   ],
   "host_permissions": [
     "*://lichess.org/*"

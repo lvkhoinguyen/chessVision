@@ -13,9 +13,26 @@ export async function predictBoard(dataUrl, crop) {
 
   const turn = inferTurn(pieces, orientation);
   const castling = inferCastling(pieces);
-  const fenSlug = `${makeBoardFen(pieces)}_${turn[0]}_${castling}_-_0_1`;
+  const boardFen = makeBoardFen(pieces);
+  const fen = `${boardFen} ${turn[0]} ${castling} - 0 1`;
+  const fenSlug = `${boardFen}_${turn[0]}_${castling}_-_0_1`;
 
-  return `https://lichess.org/analysis/${fenSlug}?color=${orientation}`;
+  const lichessAnalysisUrl = `https://lichess.org/analysis/${fenSlug}?color=${orientation}`;
+  const lichessEditorUrl = `https://lichess.org/editor/${fenSlug}?color=${orientation}`;
+  const fenEncoded = fen.replace(/\//g, "%2F").replace(/ /g, "+");
+  const flip = orientation === "black" ? "&flip=true" : "";
+  const chesscomUrl = `https://www.chess.com/analysis?fen=${fenEncoded}${flip}`;
+
+  return {
+    fen,
+    orientation,
+    turn,
+    castling,
+    lichessUrl: lichessAnalysisUrl,
+    lichessAnalysisUrl,
+    lichessEditorUrl,
+    chesscomUrl,
+  };
 }
 
 function inferOrientation(predictions) {
