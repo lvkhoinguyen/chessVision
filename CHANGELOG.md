@@ -1,5 +1,122 @@
 # Changelog
 
+## [0.14.0](https://github.com/lvkhoinguyen/chessVision/compare/v0.13.1...v0.14.0) (2026-10-30)
+
+
+### Features
+
+* **board:** add board property to BoardPrediction ([6be97f4](https://github.com/lvkhoinguyen/chessVision/commit/6be97f4c554d44b781c5690572d5edb38d7359bb))
+* **board:** add box borders and column alignment to render_board ([6b77b05](https://github.com/lvkhoinguyen/chessVision/commit/6b77b05d5ba7493c7a603045b22c0cb281ea9266))
+* **board:** add chesscom_url and lichess_url properties to BoardPrediction ([cfd636b](https://github.com/lvkhoinguyen/chessVision/commit/cfd636ba8d04ffb23f0d2f96873691982654076a))
+* **board:** add is_valid property to BoardPrediction ([fdfc466](https://github.com/lvkhoinguyen/chessVision/commit/fdfc4666d973293c9bec6da54d254a23a0814339))
+* **board:** add pgn property to BoardPrediction ([8a33321](https://github.com/lvkhoinguyen/chessVision/commit/8a333217c98247a6c2f3991ae1097fed44257600))
+* **board:** add url property to BoardPrediction ([9756156](https://github.com/lvkhoinguyen/chessVision/commit/97561564e004de7631c810396a5430594405d000))
+* **board:** add validation_errors property to BoardPrediction ([7074d6e](https://github.com/lvkhoinguyen/chessVision/commit/7074d6ec1e3ecbbe6cee4f3fa4dfaa740b911af4))
+* **board:** implement __str__ on BoardPrediction ([3916dc4](https://github.com/lvkhoinguyen/chessVision/commit/3916dc49417aef93d362741dd058d1143af76052))
+* **board:** implement BoardPredictor and FEN generation pipeline ([e2845f9](https://github.com/lvkhoinguyen/chessVision/commit/e2845f9cc65e2d9ab9b2ebb14764055e86e2b390))
+* **board:** infer castling rights automatically from piece positions ([66ecab0](https://github.com/lvkhoinguyen/chessVision/commit/66ecab0203a1b7fbdce9fab095c3a4d20fa4224e))
+* **board:** infer orientation automatically from piece positions ([e37f57e](https://github.com/lvkhoinguyen/chessVision/commit/e37f57e3d8c7f565a7f45e781f6bea42dd6e6f81))
+* **board:** infer turn automatically from piece positions ([f05dfda](https://github.com/lvkhoinguyen/chessVision/commit/f05dfda0ab470a3a12034a57e6e38e2e9abfbcf1))
+* **board:** use Turn enum for active color parameter ([4220604](https://github.com/lvkhoinguyen/chessVision/commit/42206049715b6320b2182458898aad2bb137dba8))
+* **classifier:** add name property to SquarePrediction ([f331d5a](https://github.com/lvkhoinguyen/chessVision/commit/f331d5a8af07553f25bbe19a295b976f15542605))
+* **classifier:** implement PieceClassifier with onnx inference and model caching ([7b691d4](https://github.com/lvkhoinguyen/chessVision/commit/7b691d4aa181d488fc1bb981582dad881a9ddec8))
+* **classifier:** support custom model path and cache directory ([cfca7e8](https://github.com/lvkhoinguyen/chessVision/commit/cfca7e8d4b040f2336702f36dd106da71fb7945a))
+* **classifier:** update inference pipeline for yolo26n and verify model integrity with sha256 ([5c82142](https://github.com/lvkhoinguyen/chessVision/commit/5c821422b7f1feb42a33ac1aaa6696bb5030796b))
+* **cli:** add --open flag to open position in lichess editor ([b57e74d](https://github.com/lvkhoinguyen/chessVision/commit/b57e74d18d0af2dd8c04bb07b930cc5556926d23))
+* **cli:** add --turn flag to specify side to move ([f0d4204](https://github.com/lvkhoinguyen/chessVision/commit/f0d4204e8aea591b3317b10d90f4173da85bda21))
+* **cli:** add board prediction command ([f9e68b4](https://github.com/lvkhoinguyen/chessVision/commit/f9e68b49a4f2a45f8af63c667f7d7f0d6be67181))
+* **cli:** add clipboard image fallback to board command ([db1db6b](https://github.com/lvkhoinguyen/chessVision/commit/db1db6ba97093876f56948868c83cffe2f06d11c))
+* **cli:** add initial cli entrypoint and project scaffolding ([09593ba](https://github.com/lvkhoinguyen/chessVision/commit/09593ba8a3f4c6c72a71d347d9b187fdc7837348))
+* **cli:** add output option to pdf command for pgn export ([aeff387](https://github.com/lvkhoinguyen/chessVision/commit/aeff38718b5e8ce9f38fdab62fa95a015233225b))
+* **cli:** add pdf command for multi-page board prediction ([f87ac43](https://github.com/lvkhoinguyen/chessVision/commit/f87ac4379b18b873eff7284e30445faf59651251))
+* **cli:** add site option to board command for lichess and chess.com ([d039dbc](https://github.com/lvkhoinguyen/chessVision/commit/d039dbc491f8b8c7a9e92bd2e8939575b8019116))
+* **cli:** add square prediction command ([a971379](https://github.com/lvkhoinguyen/chessVision/commit/a971379560e50b3afc57c25f00ac973aceeaf89d))
+* **cli:** default castling option to auto ([fac4a52](https://github.com/lvkhoinguyen/chessVision/commit/fac4a52f24172f6386851570f1eee96b5ec9a40d))
+* **cli:** default orientation option to auto ([c47b123](https://github.com/lvkhoinguyen/chessVision/commit/c47b123bb3210051a1a1e5a149e884f66db6ff15))
+* **cli:** default turn option to auto ([a6ae778](https://github.com/lvkhoinguyen/chessVision/commit/a6ae77836c82ffdcec305a4a25993754920e1592))
+* **cli:** disable shell completion and show help by default ([8c6e03b](https://github.com/lvkhoinguyen/chessVision/commit/8c6e03b8c6d2e41988cbbc82cec9a56250016598))
+* **cli:** report validation errors at the end of board prediction ([a911986](https://github.com/lvkhoinguyen/chessVision/commit/a911986e2170065afa891208087b48943d900333))
+* **cli:** support multi-board detection in board prediction command ([5d124d6](https://github.com/lvkhoinguyen/chessVision/commit/5d124d671786496cd2e0ae74179022c1e65c8be9))
+* **cli:** use piece name in square command and center multi-board header ([6da2fd3](https://github.com/lvkhoinguyen/chessVision/commit/6da2fd3ec4b34e39d82513c78b7ae188ed5ad949))
+* **cli:** warn if illegal chess position is detected ([c83dc46](https://github.com/lvkhoinguyen/chessVision/commit/c83dc4628b2ba1da94d227b7321cc63c7895e20f))
+* **constants:** add AUTO to orientation enum with validation guards ([049ddec](https://github.com/lvkhoinguyen/chessVision/commit/049ddec95f5e1ba79fba8e0beff1b87066061cdf))
+* **constants:** add AUTO to Turn enum with validation guard ([0df6223](https://github.com/lvkhoinguyen/chessVision/commit/0df6223179d931028d41d1014d15aa3c34772eec))
+* **constants:** add orientation and castling enums with piece symbol mappings ([302ed87](https://github.com/lvkhoinguyen/chessVision/commit/302ed875f7c7fa7d3f7bacf3cc83861b55130a94))
+* **constants:** add piece classes and lookup mapping ([ee2c988](https://github.com/lvkhoinguyen/chessVision/commit/ee2c9887e0ecd9ac91199bc732bf737bdcd433e7))
+* **constants:** add PIECE_NAMES mapping for human-readable labels ([3550e05](https://github.com/lvkhoinguyen/chessVision/commit/3550e05014eb8404a7d2affe2da9b25aa2705e0b))
+* **constants:** add turn enum to specify side to move ([2eb1e48](https://github.com/lvkhoinguyen/chessVision/commit/2eb1e480ce0a788574e2d622a88fb31613ebb340))
+* **detector:** add 8x8 chessboard verification and adaptive thresholding ([eb924f5](https://github.com/lvkhoinguyen/chessVision/commit/eb924f58ebe1bce7ec1f491a50c1f6492d7282b6))
+* **detector:** add hierarchical contour detection, otsu thresholding, and nms deduplication ([5993ab6](https://github.com/lvkhoinguyen/chessVision/commit/5993ab62f0ab28b5485f3bc4d69a111686478885))
+* **detector:** fallback to full image when no contour candidates found ([83cdad7](https://github.com/lvkhoinguyen/chessVision/commit/83cdad7c951bb4e48e37809f6037bbb8a95208af))
+* **detector:** implement BoardDetector for multi-board detection ([d2df679](https://github.com/lvkhoinguyen/chessVision/commit/d2df679cdc496368fe6f5614505189589f891bd1))
+* **detector:** improve board detection pipeline and NMS contrast scoring ([3104208](https://github.com/lvkhoinguyen/chessVision/commit/3104208b885acee1eef0fb43208b0d7bbd4589bd))
+* **detector:** return DetectedBoard from BoardDetector.detect ([a3134e1](https://github.com/lvkhoinguyen/chessVision/commit/a3134e13cd12e5e3021625e7c3f7463c4f26b40c))
+* **init:** implement `__dir__` for lazy exports ([d22a001](https://github.com/lvkhoinguyen/chessVision/commit/d22a001cdd25718b3f78d82e89d986415df0e3ec))
+* **logging:** add diagnostic logging and verbose options in CLI ([de996ca](https://github.com/lvkhoinguyen/chessVision/commit/de996cabb012eb34538959ad2a3b6b09da343a3b))
+* **model:** bundle piece classifier model inside package wheel ([996aa22](https://github.com/lvkhoinguyen/chessVision/commit/996aa227a55b00ef6b0f60631b825912006955d3))
+* **pdf:** implement PDFPredictor for multi-page board prediction ([113d8e9](https://github.com/lvkhoinguyen/chessVision/commit/113d8e9eb252ff6c9eb9c19bb5512afe355acef0))
+* **project:** support Python &gt;=3.11 ([e5a2094](https://github.com/lvkhoinguyen/chessVision/commit/e5a2094570716a82f63d776985568c785e62aecd))
+* **train:** add chess.com assets and parallelize piece dataset generation ([2d1a9a7](https://github.com/lvkhoinguyen/chessVision/commit/2d1a9a7ecd3c4f87bade2ce67304de7e8109da5f))
+* **train:** add piece classifier training pipeline and image transforms ([ad0f3dc](https://github.com/lvkhoinguyen/chessVision/commit/ad0f3dc71022e46a1a7302135693141bd16c9c6e))
+* **train:** add synthetic dataset generator and training assets ([8db6306](https://github.com/lvkhoinguyen/chessVision/commit/8db630620a4fd5fa4415d097a0303333dfbd1731))
+* **train:** embed metadata in model and remove max batch size constraint ([4743e2b](https://github.com/lvkhoinguyen/chessVision/commit/4743e2b9180483c898ef71a7eaa2b5024ea81e22))
+
+
+### Bug Fixes
+
+* **classifier:** disable appauthor to prevent duplicate directories on Windows ([aca82bf](https://github.com/lvkhoinguyen/chessVision/commit/aca82bf0a23782ee8b506082ee9f42791172119f))
+* include AI onnx model in extension folder for direct use ([169dacb](https://github.com/lvkhoinguyen/chessVision/commit/169dacb0573bf9dc03c663289105e43660713ac4))
+* **init:** preserve module dunder attributes in `__dir__` ([e84a1ce](https://github.com/lvkhoinguyen/chessVision/commit/e84a1ce00e74a95db4e281c84ccc9e7a2b7e99a1))
+* prevent numpy scalar types from leaking into dataclasses ([323c9e9](https://github.com/lvkhoinguyen/chessVision/commit/323c9e90f9d468ccb12ba6a98322092918b8484b))
+
+
+### Performance Improvements
+
+* **init:** implement lazy loading for top-level exports ([91e8ba9](https://github.com/lvkhoinguyen/chessVision/commit/91e8ba94f215fb7ebe273c333320c06fde19773d))
+* **train:** migrate to yolo26n-cls for faster inference and higher accuracy ([8b2e4b2](https://github.com/lvkhoinguyen/chessVision/commit/8b2e4b249461dd71cb45726dac31b35425ef75a4))
+* **utils:** skip redundant RGB conversion in `to_pil_image` ([2c2e594](https://github.com/lvkhoinguyen/chessVision/commit/2c2e5946973a122d58ddcc6a2bf770327c02668e))
+
+
+### Refactor
+
+* add `__all__` exports across modules ([143f131](https://github.com/lvkhoinguyen/chessVision/commit/143f131e4745e9947c957f7ab8a39bad2e8399ea))
+* **board:** decouple orientation from slice_board ([f4a7aa5](https://github.com/lvkhoinguyen/chessVision/commit/f4a7aa59b56cb0c784b4839c398e5142fb3d440d))
+* **board:** make `STATUS_ERROR_MESSAGES` private and enforce strict `zip` ([21df70e](https://github.com/lvkhoinguyen/chessVision/commit/21df70e57c8994e774ca7abc840a44cd7b9f9fb9))
+* **board:** remove redundant url property from BoardPrediction ([7983046](https://github.com/lvkhoinguyen/chessVision/commit/7983046edaab6a7960321f57066e12bf57578117))
+* **board:** rename `render_board` property to `ascii_board` ([7840bdc](https://github.com/lvkhoinguyen/chessVision/commit/7840bdca217716676150ed780c00192f0f188a9a))
+* **board:** replace `np.mean` with `statistics.fmean` ([9d49245](https://github.com/lvkhoinguyen/chessVision/commit/9d49245ef1c566838f1dcf3a5402cc46cf75b16b))
+* **classifier:** clean up redundant type casts ([32c97d7](https://github.com/lvkhoinguyen/chessVision/commit/32c97d77d2f8e4b5b9fc54ba637448585a8be3e3))
+* **classifier:** delegate single-square prediction to `predict_squares` ([e4989ac](https://github.com/lvkhoinguyen/chessVision/commit/e4989acc9321cdc8855b4d9e1a976977a68047b6))
+* **classifier:** replace `onnxruntime` with `cv2.dnn` for model inference ([01cfe32](https://github.com/lvkhoinguyen/chessVision/commit/01cfe324791f19f030f3580e8e4a5b142fb6434c))
+* **classifier:** simplify and vectorize square preprocessing ([e4fbe47](https://github.com/lvkhoinguyen/chessVision/commit/e4fbe476bb4a6befa8266291c6f168ca1be01ff9))
+* **classifier:** stream model checksum verification using hashlib.file_digest ([e1e4784](https://github.com/lvkhoinguyen/chessVision/commit/e1e4784325c5f30850c45812be38293dee41df00))
+* clean up redundant guards, URL resolution, and piece lookup ([afedcf3](https://github.com/lvkhoinguyen/chessVision/commit/afedcf3b2296cb9db1829be6562b9dbf312fbde2))
+* **cli:** check `validation_errors` directly to avoid double validation ([10dad3a](https://github.com/lvkhoinguyen/chessVision/commit/10dad3ab5e498c05d12a1f8d31ea864bcc75f981))
+* **cli:** delegate pdf prediction to PDFPredictor ([1fc1167](https://github.com/lvkhoinguyen/chessVision/commit/1fc1167e9097eae2a11ca2342202bdea541af2c9))
+* **cli:** modularize cli and test suite ([3d31040](https://github.com/lvkhoinguyen/chessVision/commit/3d31040bd1e74ff9bb030989dc009efc40f1a2e8))
+* **cli:** support string labels in validation error reporting ([8f290fe](https://github.com/lvkhoinguyen/chessVision/commit/8f290fec5ad271c920eb4af8966bc802f19b103d))
+* **constants:** rename `IMAGE_SIZE` to `SQUARE_SIZE` and remove unused `CLASS_TO_INDEX` ([459e081](https://github.com/lvkhoinguyen/chessVision/commit/459e08121a59ccd2d6fb6a28ebda08c914a0bb2e))
+* **detector:** extract constants and add early size validation ([f607672](https://github.com/lvkhoinguyen/chessVision/commit/f607672a074668c51a166120a0389e5b72d1868b))
+* **detector:** remove redundant default arguments in `DetectedBoard` and `_dewarp_quad` ([4ff6c29](https://github.com/lvkhoinguyen/chessVision/commit/4ff6c29c459fcc6b20236941c4566f5c9cccd2cf))
+* extract image conversion into `_utils` and make `slice_board` private ([cb672ee](https://github.com/lvkhoinguyen/chessVision/commit/cb672ee4e109b7950ea2164bdf10dc5e526c0467))
+* replace Castling enum with string representation and CLI validation ([e247880](https://github.com/lvkhoinguyen/chessVision/commit/e247880ab552c2c99df236707c0e301e8a658ac8))
+
+
+### Documentation
+
+* **readme:** add browser extension guide and update CLI tables ([dc87830](https://github.com/lvkhoinguyen/chessVision/commit/dc87830c2e53e078bca5c33d560fa7e58ac764b7))
+* **readme:** add chess.com asset attributions ([28f4228](https://github.com/lvkhoinguyen/chessVision/commit/28f42281bf34de40205fa771dfdf30a23fc58ef1))
+* **readme:** add codecov and hugging face badges ([81b7e52](https://github.com/lvkhoinguyen/chessVision/commit/81b7e522459513f59dcfb8e3421cd5b84c11551a))
+* **readme:** add Edge Add-ons store link ([d4b8de3](https://github.com/lvkhoinguyen/chessVision/commit/d4b8de3b0a26320c614b9bf0df0a5c44bfb43d75))
+* **readme:** add project banners and center badges ([962f760](https://github.com/lvkhoinguyen/chessVision/commit/962f7605f0c4f20aba56c6762d3209588d04126c))
+* **readme:** add pytest badge ([240836d](https://github.com/lvkhoinguyen/chessVision/commit/240836de50949d03e4c4e435a335cf43b6ca2c75))
+* **readme:** remove obsolete model cache section and huggingface badge ([226ccda](https://github.com/lvkhoinguyen/chessVision/commit/226ccdacd6bd6499584975f5cd507157e665d48e))
+* **readme:** update API usage examples ([48e3785](https://github.com/lvkhoinguyen/chessVision/commit/48e378563e8b735050f3dfd093d069dde9df9836))
+* **readme:** update API usage examples ([e3b00d7](https://github.com/lvkhoinguyen/chessVision/commit/e3b00d725549d2af0b037ad876086258ee5a5b4c))
+* **readme:** update browser logo URLs ([12923e6](https://github.com/lvkhoinguyen/chessVision/commit/12923e6c5cd7c476aa97571e5aedd62a13c7f4b6))
+* **readme:** update README and add demo assets ([66b55e6](https://github.com/lvkhoinguyen/chessVision/commit/66b55e6de749851dd8b0365292c0229b94b48586))
+* use imperative mood in CLI docstrings and fix README punctuation ([0496c67](https://github.com/lvkhoinguyen/chessVision/commit/0496c67c512445c87939ef969aa97fe3926efbcc))
+
 ## [0.13.1](https://github.com/harshitpawar64/chessvision/compare/v0.13.0...v0.13.1) (2026-10-21)
 
 
