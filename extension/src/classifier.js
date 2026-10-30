@@ -34,6 +34,73 @@ function dataURItoBlob(dataUrl) {
   return new Blob([ia], { type: mimeString });
 }
 
+function trimBoardMargin(ctx) {
+  try {
+    const { data } = ctx.getImageData(0, 0, BOARD_SIZE, BOARD_SIZE);
+    const diffY = new Float32Array(BOARD_SIZE);
+    const diffX = new Float32Array(BOARD_SIZE);
+
+    for (let y = 1; y < BOARD_SIZE; y++) {
+      let sum = 0;
+      const r1 = y * BOARD_SIZE * 4;
+      const r0 = (y - 1) * BOARD_SIZE * 4;
+      for (let x = 0; x < BOARD_SIZE; x += 2) {
+        const lum1 = data[r1 + (x << 2)] * 0.299 + data[r1 + (x << 2) + 1] * 0.587 + data[r1 + (x << 2) + 2] * 0.114;
+        const lum0 = data[r0 + (x << 2)] * 0.299 + data[r0 + (x << 2) + 1] * 0.587 + data[r0 + (x << 2) + 2] * 0.114;
+        sum += Math.abs(lum1 - lum0);
+      }
+      diffY[y] = sum / (BOARD_SIZE / 2);
+    }
+
+    for (let x = 1; x < BOARD_SIZE; x++) {
+      let sum = 0;
+      for (let y = 0; y < BOARD_SIZE; y += 2) {
+        const idx1 = (y * BOARD_SIZE + x) * 4;
+        const idx0 = (y * BOARD_SIZE + (x - 1)) * 4;
+        const lum1 = data[idx1] * 0.299 + data[idx1 + 1] * 0.587 + data[idx1 + 2] * 0.114;
+        const lum0 = data[idx0] * 0.299 + data[idx0 + 1] * 0.587 + data[idx0 + 2] * 0.114;
+        sum += Math.abs(lum1 - lum0);
+      }
+      diffX[x] = sum / (BOARD_SIZE / 2);
+    }
+
+    const maxY = Math.max(...diffY);
+    const maxX = Math.max(...diffX);
+    const threshY = maxY * 0.22;
+    const threshX = maxX * 0.22;
+
+    const maxMargin = Math.round(BOARD_SIZE * 0.20);
+    let y0 = 0, y1 = BOARD_SIZE - 1;
+    let x0 = 0, x1 = BOARD_SIZE - 1;
+
+    for (let y = 1; y < maxMargin; y++) {
+      if (diffY[y] > threshY) { y0 = y; break; }
+    }
+    for (let y = BOARD_SIZE - 1; y >= BOARD_SIZE - maxMargin; y--) {
+      if (diffY[y] > threshY) { y1 = y; break; }
+    }
+    for (let x = 1; x < maxMargin; x++) {
+      if (diffX[x] > threshX) { x0 = x; break; }
+    }
+    for (let x = BOARD_SIZE - 1; x >= BOARD_SIZE - maxMargin; x--) {
+      if (diffX[x] > threshX) { x1 = x; break; }
+    }
+
+    const bw = x1 - x0;
+    const bh = y1 - y0;
+
+    if (bw < BOARD_SIZE * 0.98 && bh < BOARD_SIZE * 0.98 && bw > BOARD_SIZE * 0.72 && bh > BOARD_SIZE * 0.72) {
+      const tempCanvas = new OffscreenCanvas(bw, bh);
+      const tempCtx = tempCanvas.getContext("2d");
+      tempCtx.drawImage(ctx.canvas, x0, y0, bw, bh, 0, 0, bw, bh);
+      ctx.clearRect(0, 0, BOARD_SIZE, BOARD_SIZE);
+      ctx.drawImage(tempCanvas, 0, 0, bw, bh, 0, 0, BOARD_SIZE, BOARD_SIZE);
+    }
+  } catch {
+    // If trimming fails, keep original drawn canvas
+  }
+}
+
 export async function predictBoardSquares(dataUrl, crop) {
   const getBitmapPromise = (async () => {
     try {
@@ -62,6 +129,8 @@ export async function predictBoardSquares(dataUrl, crop) {
   ctx.imageSmoothingQuality = "high";
   ctx.drawImage(bitmap, 0, 0, BOARD_SIZE, BOARD_SIZE);
   bitmap.close();
+
+  trimBoardMargin(ctx);
 
   const { data } = ctx.getImageData(0, 0, BOARD_SIZE, BOARD_SIZE);
   const planeSize = SQUARE_SIZE * SQUARE_SIZE;
